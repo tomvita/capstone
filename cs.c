@@ -365,11 +365,11 @@ cs_vsnprintf_t cs_vsnprintf = vsnprintf;
 #endif  // !defined(CAPSTONE_HAS_OSXKERNEL) && !defined(_KERNEL_MODE)
 #else
 // User-defined
-cs_malloc_t cs_mem_malloc = NULL;
-cs_calloc_t cs_mem_calloc = NULL;
-cs_realloc_t cs_mem_realloc = NULL;
-cs_free_t cs_mem_free = NULL;
-cs_vsnprintf_t cs_vsnprintf = NULL;
+cs_malloc_t cs_mem_malloc = malloc;
+cs_calloc_t cs_mem_calloc = calloc;
+cs_realloc_t cs_mem_realloc = realloc;
+cs_free_t cs_mem_free = free;
+cs_vsnprintf_t cs_vsnprintf = vsnprintf;
 
 #endif  // defined(CAPSTONE_USE_SYS_DYN_MEM)
 
