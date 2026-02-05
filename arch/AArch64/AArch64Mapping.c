@@ -13,7 +13,7 @@
 #define GET_INSTRINFO_ENUM
 #include "AArch64GenInstrInfo.inc"
 
-#ifndef CAPSTONE_DIET
+// #ifndef CAPSTONE_DIET
 static const name_map reg_name_maps[] = {
 	{ ARM64_REG_INVALID, NULL },
 
@@ -278,18 +278,18 @@ static const name_map reg_name_maps[] = {
 	{ ARM64_REG_V30, "v30"},
 	{ ARM64_REG_V31, "v31"},
 };
-#endif
+// #endif
 
 const char *AArch64_reg_name(csh handle, unsigned int reg)
 {
-#ifndef CAPSTONE_DIET
+// #ifndef CAPSTONE_DIET
 	if (reg >= ARR_SIZE(reg_name_maps))
 		return NULL;
 
 	return reg_name_maps[reg].name;
-#else
-	return NULL;
-#endif
+// #else
+// 	return NULL;
+// #endif
 }
 
 static const insn_map insns[] = {
@@ -805,7 +805,7 @@ static const name_map alias_insn_name_maps[] = {
 
 const char *AArch64_insn_name(csh handle, unsigned int id)
 {
-#ifndef CAPSTONE_DIET
+// #ifndef CAPSTONE_DIET
 	unsigned int i;
 
 	if (id >= ARM64_INS_ENDING)
@@ -822,12 +822,11 @@ const char *AArch64_insn_name(csh handle, unsigned int id)
 
 	// not found
 	return NULL;
-#else
-	return NULL;
-#endif
+// #else
+// 	return NULL;
+// #endif
 }
 
-#ifndef CAPSTONE_DIET
 static const name_map group_name_maps[] = {
 	// generic groups
 	{ ARM64_GRP_INVALID, NULL },
@@ -844,15 +843,10 @@ static const name_map group_name_maps[] = {
 	{ ARM64_GRP_NEON, "neon" },
 	{ ARM64_GRP_CRC, "crc" },
 };
-#endif
 
 const char *AArch64_group_name(csh handle, unsigned int id)
 {
-#ifndef CAPSTONE_DIET
 	return id2name(group_name_maps, ARR_SIZE(group_name_maps), id);
-#else
-	return NULL;
-#endif
 }
 
 // map instruction name to public instruction ID

@@ -557,9 +557,9 @@ cs_err CAPSTONE_API cs_close(csh *handle)
 static void fill_insn(struct cs_struct *handle, cs_insn *insn, char *buffer, MCInst *mci,
 		PostPrinter_t postprinter, const uint8_t *code)
 {
-#ifndef CAPSTONE_DIET
+// #ifndef CAPSTONE_DIET
 	char *sp, *mnem;
-#endif
+// #endif
 	uint16_t copy_size = MIN(sizeof(insn->bytes), insn->size);
 
 	// fill the instruction bytes.
@@ -575,7 +575,7 @@ static void fill_insn(struct cs_struct *handle, cs_insn *insn, char *buffer, MCI
 	if (postprinter)
 		postprinter((csh)handle, insn, buffer, mci);
 
-#ifndef CAPSTONE_DIET
+// #ifndef CAPSTONE_DIET
 	// fill in mnemonic & operands
 	// find first space or tab
 	mnem = insn->mnemonic;
@@ -614,7 +614,7 @@ static void fill_insn(struct cs_struct *handle, cs_insn *insn, char *buffer, MCI
 		insn->op_str[sizeof(insn->op_str) - 1] = '\0';
 	} else
 		insn->op_str[0] = '\0';
-#endif
+// #endif
 }
 
 // how many bytes will we skip when encountering data (CS_OPT_SKIPDATA)?
@@ -888,11 +888,11 @@ size_t CAPSTONE_API cs_disasm(csh ud, const uint8_t *buffer, size_t size, uint64
 		// save all the information for non-detailed mode
 		mci.flat_insn = insn_cache;
 		mci.flat_insn->address = offset;
-#ifdef CAPSTONE_DIET
-		// zero out mnemonic & op_str
-		mci.flat_insn->mnemonic[0] = '\0';
-		mci.flat_insn->op_str[0] = '\0';
-#endif
+// #ifdef CAPSTONE_DIET
+// 		// zero out mnemonic & op_str
+// 		mci.flat_insn->mnemonic[0] = '\0';
+// 		mci.flat_insn->op_str[0] = '\0';
+// #endif
 
 		r = handle->disasm(ud, buffer, size, &mci, &insn_size, offset, handle->getinsn_info);
 		if (r) {
